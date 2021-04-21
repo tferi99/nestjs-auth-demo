@@ -6,6 +6,7 @@ import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 import { jwtConstants } from './constants';
 import { JwtStrategy } from './jwt-strategy';
+import { DiscordStrategy } from './discord-strategy';
 
 @Module({
   imports: [
@@ -19,7 +20,8 @@ import { JwtStrategy } from './jwt-strategy';
   providers: [
     AuthService,
     LocalBasicStrategy,
-    JwtStrategy
+    JwtStrategy,
+    DiscordStrategy
   ],
   exports: [
     AuthService
