@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UserService } from '../user/user.service';
 
@@ -20,13 +20,26 @@ export class AuthService {
   }
 
   // for JWT
-  async login(user: any) {
+  async loginForJwtToken(user: any) {
     const payload = { username: user.username, sub: user.userId };
+
+    // checking user in auth DB
+    // ....
+
     const access_token = this.jwtService.sign(payload); // generating JWT from subset of user
     console.log('Generated JWT:', access_token);
 
     return {
       access_token,
     };
+  }
+
+  async findUserFromDiscordId(discordId: string): Promise<any> {
+    const user = await this.usersService.findOneDiscordUser('discord_id', discordId);
+
+    if (!user) {
+      throw new UnauthorizedException();
+    }
+    return user;
   }
 }

@@ -4,9 +4,13 @@ import { UserModule } from '../user/user.module';
 import { LocalBasicStrategy } from './local-basic-strategy';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
-import { jwtConstants } from './constants';
+import { jwtConstants } from './auth-constants';
 import { JwtStrategy } from './jwt-strategy';
-import { DiscordStrategy } from './discord-strategy';
+import { DummyStrategy } from './dummy-strategy';
+import { HttpDigestStrategy } from './http-digest-strategy';
+import { HttpBasicStrategy } from './http-basic-strategy';
+import { HeaderApiKeyStrategy } from './header-api-key.strategy';
+
 
 @Module({
   imports: [
@@ -20,11 +24,12 @@ import { DiscordStrategy } from './discord-strategy';
   providers: [
     AuthService,
     LocalBasicStrategy,
+    HttpBasicStrategy,
+    HttpDigestStrategy,
     JwtStrategy,
-    DiscordStrategy
+    DummyStrategy,
+    HeaderApiKeyStrategy,
   ],
-  exports: [
-    AuthService
-  ]
+  exports: [AuthService],
 })
 export class AuthModule {}

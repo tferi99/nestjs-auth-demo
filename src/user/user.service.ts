@@ -1,6 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { User } from './User';
 
+export type DiscordUser = any;
+
 @Injectable()
 export class UserService {
   private readonly users = [
@@ -16,7 +18,41 @@ export class UserService {
     },
   ];
 
+  private readonly discordUsers = [
+    {
+      userId: 0,
+      name: 'FToth from demo app',
+      discord_id: '426324681910517760',
+    },
+    {
+      userId: 1,
+      name: 'bob',
+      discord_id: '1234sfaf',
+    },
+    {
+      userId: 2,
+      name: 'jeff',
+      discord_id: 't4ege4yhesyhe',
+    },
+    {
+      userId: 3,
+      name: 'maria',
+      discord_id: 'erh5ree45',
+    },
+  ];
+
   async findOne(username: string): Promise<User | undefined> {
     return this.users.find((user) => user.username === username);
+  }
+
+  async findOneDiscordUser(field: string, discordId: string): Promise<User | undefined> {
+    console.log(`### UsersService.findOne(field:${field},discordId:${discordId}) - looking for user`);
+    const u = this.users.find(user => user[field] === discordId);
+    if (u) {
+      console.info('### UsersService.findOne() - user found:', u);
+    } else {
+      console.error('### UsersService.findOne() - User not found');
+    }
+    return u;
   }
 }
