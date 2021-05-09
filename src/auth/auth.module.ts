@@ -11,7 +11,6 @@ import { HttpDigestStrategy } from './http-digest-strategy';
 import { HttpBasicStrategy } from './http-basic-strategy';
 import { HeaderApiKeyStrategy } from './header-api-key.strategy';
 
-
 @Module({
   imports: [
     UserModule,
