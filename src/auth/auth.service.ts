@@ -21,6 +21,7 @@ export class AuthService {
 
   // for JWT
   async loginForJwtToken(user: any) {
+    console.log('--> loginForJwtToken()', user);
     const payload = { username: user.username, sub: user.userId };
 
     // checking user in auth DB
