@@ -1,20 +1,28 @@
 import { Injectable } from '@nestjs/common';
-import { User } from './User';
+import { User } from './user';
 
 export type DiscordUser = any;
 
 @Injectable()
 export class UserService {
-  private readonly users = [
+  private readonly users: User[] = [
+    {
+      id: 1,
+      username: 'admin',
+      password: 'admin',
+      admin: true,
+    },
     {
       id: 1,
       username: 'john',
       password: '123',
+      admin: true,
     },
     {
       id: 2,
       username: 'maria',
       password: '456',
+      admin: false,
     },
   ];
 
@@ -23,21 +31,25 @@ export class UserService {
       userId: 0,
       name: 'FToth from demo app',
       discord_id: '426324681910517760',
+      admin: false,
     },
     {
       userId: 1,
       name: 'bob',
       discord_id: '1234sfaf',
+      admin: false,
     },
     {
       userId: 2,
       name: 'jeff',
       discord_id: 't4ege4yhesyhe',
+      admin: false,
     },
     {
       userId: 3,
       name: 'maria',
       discord_id: 'erh5ree45',
+      admin: false,
     },
   ];
 
